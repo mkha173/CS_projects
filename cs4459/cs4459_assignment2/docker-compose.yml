@@ -1,0 +1,91 @@
+services:
+  # --------------------------------------------------------------------------
+  # PostgreSQL Database (Provided — Do Not Modify)
+  # --------------------------------------------------------------------------
+  database:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: tickets
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d tickets"]
+      interval: 5s
+      timeout: 3s
+      start_period: 10s
+      retries: 5
+
+  # --------------------------------------------------------------------------
+  # Booking Service (Provided — Do Not Modify)
+  # --------------------------------------------------------------------------
+  booking-service:
+    build: ./booking_service
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: tickets
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      # Part 1: tokens not validated. Set to "true" for Part 2.
+      VALIDATE_TOKENS: "true"
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+
+  # --------------------------------------------------------------------------
+  # Lock Server ()
+  # --------------------------------------------------------------------------
+  lock-server:
+    build: ./lock_server
+    ports:
+      - "6000:6000"
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: tickets
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:6000/health')"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+  # --------------------------------------------------------------------------
+  # Worker / Booking Agent ()
+  # Scale with: docker compose up --scale worker=N
+  # --------------------------------------------------------------------------
+  worker:
+    build: ./worker
+    environment:
+      LOCK_SERVER_URL: http://lock-server:6000
+      BOOKING_SERVICE_URL: http://booking-service:8000
+    depends_on:
+      lock-server:
+        condition: service_healthy
+      booking-service:
+        condition: service_healthy
+    deploy:
+      replicas: 1
+
+networks:
+  default:
+    name: ticketbooking-net

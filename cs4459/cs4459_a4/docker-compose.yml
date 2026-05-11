@@ -1,0 +1,109 @@
+version: "3.8"
+
+networks:
+  rideflow-net:
+    driver: bridge
+
+services:
+
+  # ── Config Server Replica Set (configRS) ──────────────────────────────────
+  configsvr0:
+    image: mongo:7
+    container_name: configsvr0
+    command: mongod --configsvr --replSet configRS --bind_ip_all --port 27020
+    ports:
+      - "27020:27020"
+    networks:
+      - rideflow-net
+
+  configsvr1:
+    image: mongo:7
+    container_name: configsvr1
+    command: mongod --configsvr --replSet configRS --bind_ip_all --port 27021
+    ports:
+      - "27021:27021"
+    networks:
+      - rideflow-net
+
+  configsvr2:
+    image: mongo:7
+    container_name: configsvr2
+    command: mongod --configsvr --replSet configRS --bind_ip_all --port 27022
+    ports:
+      - "27022:27022"
+    networks:
+      - rideflow-net
+
+  # ── Shard 0 Replica Set (shard0RS) ────────────────────────────────────────
+  shard0a:
+    image: mongo:7
+    container_name: shard0a
+    command: mongod --shardsvr --replSet shard0RS --bind_ip_all --port 27017
+    ports:
+      - "27017:27017"
+    networks:
+      - rideflow-net
+
+  shard0b:
+    image: mongo:7
+    container_name: shard0b
+    command: mongod --shardsvr --replSet shard0RS --bind_ip_all --port 27018
+    ports:
+      - "27018:27018"
+    networks:
+      - rideflow-net
+
+  shard0c:
+    image: mongo:7
+    container_name: shard0c
+    command: mongod --shardsvr --replSet shard0RS --bind_ip_all --port 27019
+    ports:
+      - "27019:27019"
+    networks:
+      - rideflow-net
+
+  # ── Shard 1 Replica Set (shard1RS) ────────────────────────────────────────
+  shard1a:
+    image: mongo:7
+    container_name: shard1a
+    command: mongod --shardsvr --replSet shard1RS --bind_ip_all --port 27027
+    ports:
+      - "27027:27027"
+    networks:
+      - rideflow-net
+
+  shard1b:
+    image: mongo:7
+    container_name: shard1b
+    command: mongod --shardsvr --replSet shard1RS --bind_ip_all --port 27028
+    ports:
+      - "27028:27028"
+    networks:
+      - rideflow-net
+
+  shard1c:
+    image: mongo:7
+    container_name: shard1c
+    command: mongod --shardsvr --replSet shard1RS --bind_ip_all --port 27029
+    ports:
+      - "27029:27029"
+    networks:
+      - rideflow-net
+
+  # ── mongos Query Router ───────────────────────────────────────────────────
+  mongos:
+    image: mongo:7
+    container_name: mongos
+    command: >
+      mongos
+      --configdb configRS/configsvr0:27020,configsvr1:27021,configsvr2:27022
+      --bind_ip_all
+      --port 27023
+    ports:
+      - "27023:27023"
+    depends_on:
+      - configsvr0
+      - configsvr1
+      - configsvr2
+    networks:
+      - rideflow-net

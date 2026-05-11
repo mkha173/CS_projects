@@ -1,0 +1,90 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - orderprocessing-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  inventory-service:
+    build: ./inventory_service
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: inventory
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - orderprocessing-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/inventory/summary"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  worker-1:
+    build: ./worker
+    ports:
+      - "5001:5001"
+    environment:
+      WORKER_ID: 1
+      NUM_WORKERS: 3
+      NUM_ORDERS: 50
+      INVENTORY_URL: http://inventory-service:8000
+    depends_on:
+      inventory-service:
+        condition: service_healthy
+    networks:
+      - orderprocessing-net
+
+  worker-2:
+    build: ./worker
+    ports:
+      - "5002:5002"
+    environment:
+      WORKER_ID: 2
+      NUM_WORKERS: 3
+      NUM_ORDERS: 50
+      INVENTORY_URL: http://inventory-service:8000
+    depends_on:
+      inventory-service:
+        condition: service_healthy
+    networks:
+      - orderprocessing-net
+
+  worker-3:
+    build: ./worker
+    ports:
+      - "5003:5003"
+    environment:
+      WORKER_ID: 3
+      NUM_WORKERS: 3
+      NUM_ORDERS: 50
+      INVENTORY_URL: http://inventory-service:8000
+    depends_on:
+      inventory-service:
+        condition: service_healthy
+    networks:
+      - orderprocessing-net
+
+networks:
+  orderprocessing-net:
+    driver: bridge
