@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Astrogem optimizer — Lost Ark</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f2;
+    --bg-tertiary: #efefeb;
+    --bg-success: #eaf3de;
+    --bg-info: #e6f1fb;
+    --bg-warning: #faeeda;
+    --bg-danger: #fcebeb;
+    --text-primary: #1a1a18;
+    --text-secondary: #5f5e5a;
+    --text-tertiary: #888780;
+    --text-success: #27500a;
+    --text-info: #0c447c;
+    --text-warning: #633806;
+    --text-danger: #791f1f;
+    --border-tertiary: rgba(0,0,0,0.12);
+    --border-secondary: rgba(0,0,0,0.22);
+    --border-primary: rgba(0,0,0,0.32);
+    --border-success: rgba(59,109,17,0.4);
+    --border-warning: rgba(133,79,11,0.4);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #1e1e1c;
+      --bg-secondary: #2a2a27;
+      --bg-tertiary: #18181a;
+      --bg-success: #173404;
+      --bg-info: #042c53;
+      --bg-warning: #412402;
+      --bg-danger: #501313;
+      --text-primary: #f0ede6;
+      --text-secondary: #b4b2a9;
+      --text-tertiary: #888780;
+      --text-success: #c0dd97;
+      --text-info: #b5d4f4;
+      --text-warning: #fac775;
+      --text-danger: #f7c1c1;
+      --border-tertiary: rgba(255,255,255,0.1);
+      --border-secondary: rgba(255,255,255,0.2);
+      --border-primary: rgba(255,255,255,0.3);
+      --border-success: rgba(192,221,151,0.35);
+      --border-warning: rgba(250,199,117,0.35);
+    }
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.2rem; }
+  .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; }
+  .subtitle a { color: var(--text-info); }
+  .card {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-tertiary);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .sec-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .field-label { font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: 4px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  select, input[type=number] {
+    width: 100%;
+    height: 34px;
+    padding: 0 8px;
+    font-size: 13px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 0.5px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    outline: none;
+    font-family: inherit;
+  }
+  select:focus, input[type=number]:focus {
+    border-color: var(--border-primary);
+    box-shadow: 0 0 0 2px rgba(55,138,221,0.15);
+  }
+  .weight-note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+  }
+  .gem-headers, .gem-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 0.6fr 0.5fr 0.7fr 0.7fr 24px;
+    gap: 6px;
+    align-items: center;
+  }
+  .gem-headers { margin-bottom: 4px; }
+  .gem-headers span { font-size: 11px; color: var(--text-tertiary); }
+  .gem-row { margin-bottom: 6px; }
+  .gem-row select, .gem-row input { height: 30px; font-size: 12px; padding: 0 5px; }
+  .rm-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-tertiary); font-size: 17px;
+    padding: 0; line-height: 1;
+  }
+  .rm-btn:hover { color: var(--text-primary); }
+  .add-btn {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-primary);
+    margin-top: 4px;
+    font-family: inherit;
+  }
+  .add-btn:hover { background: var(--bg-tertiary); }
+  .tip { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; }
+  .calc-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 0.5px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    margin-top: 4px;
+    font-family: inherit;
+  }
+  .calc-btn:hover { background: var(--bg-secondary); }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .metric {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 9px 10px;
+    text-align: center;
+  }
+  .metric .v { font-size: 20px; font-weight: 500; }
+  .metric .l { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .rcard {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+  .rhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 10px;
+  }
+  .pill-ex { background: #eaf3de; color: #27500a; }
+  .pill-vg { background: #e6f1fb; color: #0c447c; }
+  .pill-ok { background: #faeeda; color: #633806; }
+  .pill-bad { background: #fcebeb; color: #791f1f; }
+  .pill-keep { background: #eaf3de; color: #27500a; }
+  .pill-fuse { background: #e6f1fb; color: #0c447c; }
+  .pill-hold { background: #faeeda; color: #633806; }
+  .pill-cut { background: #fcebeb; color: #791f1f; }
+  .score-bar-bg {
+    background: var(--border-tertiary);
+    border-radius: 3px;
+    height: 5px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+  .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .rdetail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+  }
+  .radvice { font-size: 12px; color: var(--text-tertiary); }
+  .alert {
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .alert-warn { background: var(--bg-warning); color: var(--text-warning); border: 0.5px solid var(--border-warning); }
+  .alert-good { background: var(--bg-success); color: var(--text-success); border: 0.5px solid var(--border-success); }
+  .empty { text-align: center; color: var(--text-tertiary); font-size: 13px; padding: 16px 0; }
+  .below-mark { font-size: 10px; color: var(--text-warning); }
+  @media (max-width: 540px) {
+    .grid3 { grid-template-columns: 1fr; }
+    .gem-headers, .gem-row {
+      grid-template-columns: 1.1fr 0.9fr 0.5fr 0.45fr 0.6fr 0.6fr 22px;
+      gap: 4px;
+    }
+    .gem-headers span { font-size: 10px; }
+    .gem-row select, .gem-row input { font-size: 11px; padding: 0 3px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Astrogem optimizer</h1>
+  <p class="subtitle">Lost Ark · Ark Grid · based on <a href="https://www.youtube.com/watch?v=F9a-FPHBhSc" target="_blank" rel="noopener">Shizukaziye's scoring math</a></p>
+
+  <div class="card">
+    <p class="sec-label">Setup</p>
+    <div class="grid3">
+      <div>
+        <label class="field-label" for="role">Role</label>
+        <select id="role" onchange="onRoleChange()">
+          <option value="dps">DPS</option>
+          <option value="support">Support</option>
+        </select>
+      </div>
+      <div>
+        <label class="field-label" for="ilvl">Item level tier</label>
+        <select id="ilvl">
+          <option value="1730">1730</option>
+          <option value="1740" selected>1740</option>
+          <option value="1750">1750</option>
+        </select>
+      </div>
+      <div>
+        <label class="field-label" for="coreRarity">Core rarity</label>
+        <select id="coreRarity">
+          <option value="legendary">Legendary (12 WP)</option>
+          <option value="relic" selected>Relic (15 WP)</option>
+          <option value="ancient">Ancient (17 WP)</option>
+        </select>
+      </div>
+    </div>
+    <div class="weight-note" id="weightNote"></div>
+  </div>
+
+  <div class="card">
+    <p class="sec-label">Astrogems</p>
+    <div class="gem-headers">
+      <span>Type</span><span>Rarity</span><span>WP</span><span>Pts</span><span>Atk lvls</span><span>Dmg lvls</span><span></span>
+    </div>
+    <div id="gemList"></div>
+    <button class="add-btn" onclick="addGem()">+ Add gem</button>
+    <p class="tip">WP = willpower after processing. Pts = order/chaos points (target 5). Atk/Dmg lvls = side node levels (0–120). Dmg = additional damage for DPS, brand power for support.</p>
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">Score &amp; optimize</button>
+
+  <div id="results"></div>
+</div>
+
+<script>
+const CORE_WP = { legendary: 12, relic: 15, ancient: 17 };
+const GEM_TYPES = ['Stable (8)', 'Solidity (9)', 'Eternal (10)', 'Erosion (8)', 'Distortion (9)', 'Collision (10)'];
+const GEM_BASE_WP = {
+  'Stable (8)': 8, 'Solidity (9)': 9, 'Eternal (10)': 10,
+  'Erosion (8)': 8, 'Distortion (9)': 9, 'Collision (10)': 10
+};
+const RARITIES = ['Uncommon', 'Rare', 'Epic', 'Legendary', 'Relic', 'Ancient'];
+const BASELINES = { 1730: 7, 1740: 9, 1750: 11 };
+
+const WEIGHTS = {
+  wp: -2.4,
+  pts: 5.14,
+  atkpwr: 1,
+  dmg: 1.85,
+  boss: 2.55
+};
+
+let gems = [];
+let gid = 0;
+
+function scoreGem(g) {
+  return Math.round(10 * (
+    WEIGHTS.wp * g.wp +
+    WEIGHTS.pts * g.pts +
+    WEIGHTS.atkpwr * g.atkLvl +
+    WEIGHTS.dmg * g.dmgLvl
+  )) / 10;
+}
+
+function addGem(type, rarity, wp, pts, atkLvl, dmgLvl) {
+  const t = type || 'Stable (8)';
+  gems.push({
+    id: gid++,
+    type: t,
+    rarity: rarity || 'Relic',
+    wp: wp || Math.max(1, (GEM_BASE_WP[t] || 8) - 3),
+    pts: pts || 5,
+    atkLvl: atkLvl || 0,
+    dmgLvl: dmgLvl || 0
+  });
+  render();
+}
+
+function removeGem(id) {
+  gems = gems.filter(g => g.id !== id);
+  render();
+}
+
+function updateGem(id, field, val) {
+  const g = gems.find(g => g.id === id);
+  if (!g) return;
+  if (field === 'type') {
+    g.type = val;
+    g.wp = Math.max(1, (GEM_BASE_WP[val] || 8) - 3);
+  } else if (['wp', 'pts', 'atkLvl', 'dmgLvl'].includes(field)) {
+    g[field] = Math.max(0, parseInt(val) || 0);
+  } else {
+    g[field] = val;
+  }
+  render();
+}
+
+function render() {
+  const div = document.getElementById('gemList');
+  if (!gems.length) {
+    div.innerHTML = '<p class="empty">No gems added yet</p>';
+    return;
+  }
+  div.innerHTML = gems.map(g => `
+    <div class="gem-row">
+      <select onchange="updateGem(${g.id},'type',this.value)">
+        ${GEM_TYPES.map(t => `<option value="${t}"${g.type === t ? ' selected' : ''}>${t}</option>`).join('')}
+      </select>
+      <select onchange="updateGem(${g.id},'rarity',this.value)">
+        ${RARITIES.map(r => `<option value="${r}"${g.rarity === r ? ' selected' : ''}>${r}</option>`).join('')}
+      </select>
+      <input type="number" min="1" max="10" value="${g.wp}" onchange="updateGem(${g.id},'wp',this.value)" title="Willpower cost after processing" />
+      <input type="number" min="0" max="7" value="${g.pts}" onchange="updateGem(${g.id},'pts',this.value)" title="Order/chaos points" />
+      <input type="number" min="0" max="120" value="${g.atkLvl}" onchange="updateGem(${g.id},'atkLvl',this.value)" title="Attack power node levels (0-120)" />
+      <input type="number" min="0" max="120" value="${g.dmgLvl}" onchange="updateGem(${g.id},'dmgLvl',this.value)" title="Damage node levels (0-120)" />
+      <button class="rm-btn" onclick="removeGem(${g.id})" aria-label="Remove">×</button>
+    </div>
+  `).join('');
+}
+
+function onRoleChange() {
+  const role = document.getElementById('role').value;
+  const note = document.getElementById('weightNote');
+  if (role === 'dps') {
+    note.textContent = 'DPS weights: order/chaos pts ×5.14 · boss dmg ×2.55 · additional dmg ×1.85 · atk pwr ×1 · willpower ×−2.4. ~31 score ≈ 1% damage.';
+  } else {
+    note.textContent = 'Support: same formula. Replace atk pwr with ally dmg enh, additional dmg with brand power, boss dmg with ally atk enh. Each support effect is roughly half value vs DPS.';
+  }
+}
+
+function findBestCombo(gems, maxWP) {
+  let best = [], bestScore = -Infinity;
+  function rec(i, cur, usedWP, score) {
+    if (score > bestScore || (score === bestScore && cur.length < best.length)) {
+      bestScore = score;
+      best = [...cur];
+    }
+    if (i >= gems.length || cur.length >= 4) return;
+    for (let j = i; j < gems.length; j++) {
+      if (usedWP + gems[j].wp <= maxWP) {
+        rec(j + 1, [...cur, gems[j]], usedWP + gems[j].wp, score + scoreGem(gems[j]));
+      }
+    }
+  }
+  rec(0, [], 0, 0);
+  return best;
+}
+
+function calculate() {
+  const ilvl = parseInt(document.getElementById('ilvl').value);
+  const coreRarity = document.getElementById('coreRarity').value;
+  const maxWP = CORE_WP[coreRarity];
+  const baseline = BASELINES[ilvl];
+
+  if (!gems.length) {
+    document.getElementById('results').innerHTML = '<div class="card"><p class="empty">Add gems above to score them.</p></div>';
+    return;
+  }
+
+  const best = findBestCombo(gems, maxWP);
+  const bestIds = new Set(best.map(g => g.id));
+  const comboWP = best.reduce((s, g) => s + g.wp, 0);
+  const comboPts = best.reduce((s, g) => s + g.pts, 0);
+  const comboScore = best.reduce((s, g) => s + scoreGem(g), 0);
+  const dmgEst = (comboScore / 31).toFixed(2);
+  const threshLabel = comboPts >= 20 ? '20 ✦' : comboPts >= 17 ? '17+' : comboPts >= 14 ? '14+' : comboPts >= 10 ? '10+' : '< 10';
+
+  const scored = [...gems].map(g => ({ ...g, score: scoreGem(g) })).sort((a, b) => b.score - a.score);
+
+  let html = `<div class="card">
+    <p class="sec-label">Results — ${ilvl} tier (baseline ${baseline})</p>
+    <div class="metrics">
+      <div class="metric"><div class="v">${comboScore.toFixed(1)}</div><div class="l">Combo score</div></div>
+      <div class="metric"><div class="v">~${dmgEst}%</div><div class="l">Est. damage</div></div>
+      <div class="metric"><div class="v">${comboWP}/${maxWP}</div><div class="l">WP used</div></div>
+      <div class="metric"><div class="v">${comboPts}</div><div class="l">Core pts</div></div>
+      <div class="metric"><div class="v">${threshLabel}</div><div class="l">Threshold</div></div>
+    </div>`;
+
+  scored.forEach(g => {
+    const inCombo = bestIds.has(g.id);
+    const aboveBaseline = g.score >= baseline;
+    let tierPill;
+    if (g.score >= 15) tierPill = 'pill-ex';
+    else if (g.score >= 10) tierPill = 'pill-vg';
+    else if (g.score >= 5) tierPill = 'pill-ok';
+    else tierPill = 'pill-bad';
+
+    const rarity = g.rarity;
+    let action, actionPill, advice;
+    if (inCombo) {
+      action = 'Equip';
+      actionPill = 'pill-keep';
+      advice = aboveBaseline
+        ? `Above baseline ${baseline} — keeper. Continue processing to lower WP cost.`
+        : `Below baseline ${baseline} but best available. Aim to replace when better gems drop.`;
+    } else if (rarity === 'Ancient' || rarity === 'Relic') {
+      action = 'Keep/fuse';
+      actionPill = 'pill-fuse';
+      advice = `${rarity} — hold for upward fusion. Fuse ancients with two 9-cost legendaries, relics with two 10-cost legendaries.`;
+    } else if (rarity === 'Legendary') {
+      action = 'Hold';
+      actionPill = 'pill-hold';
+      advice = 'Hold as fusion fodder. 3× legendaries = 1% relic chance.';
+    } else {
+      action = 'Fuse/cut';
+      actionPill = 'pill-cut';
+      advice = g.score < 0
+        ? 'Negative score — fuse 3 with one rare + two 9-cost uncommons to steer the result.'
+        : 'Low tier — fusion material. Pair 1 rare with 2 nine-cost uncommons to avoid overflow.';
+    }
+
+    const barPct = Math.min(100, Math.max(0, Math.round((g.score / 20) * 100)));
+    const barColor = g.score >= 15 ? '#639922' : g.score >= 10 ? '#378ADD' : g.score >= 5 ? '#EF9F27' : '#E24B4A';
+    const aboveMark = aboveBaseline ? '' : '<span class="below-mark">↓ below baseline</span>';
+
+    html += `<div class="rcard">
+      <div class="rhead">
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+          <span style="font-size:14px;font-weight:500;">${g.type}</span>
+          <span style="font-size:12px;color:var(--text-secondary);">${g.rarity}</span>
+          ${inCombo ? '<span class="pill pill-keep">✓ Equip</span>' : ''}
+          ${aboveMark}
+        </div>
+        <div style="display:flex;gap:5px;">
+          <span class="pill ${tierPill}">${g.score.toFixed(1)}</span>
+          <span class="pill ${actionPill}">${action}</span>
+        </div>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:${barPct}%;background:${barColor};"></div></div>
+      <div class="rdetail">
+        <span>WP: ${g.wp} (−${(g.wp * 2.4).toFixed(1)})</span>
+        <span>Pts: ${g.pts} (+${(g.pts * 5.14).toFixed(1)})</span>
+        ${g.atkLvl ? `<span>Atk: ${g.atkLvl} (+${g.atkLvl.toFixed(1)})</span>` : ''}
+        ${g.dmgLvl ? `<span>Dmg: ${g.dmgLvl} (+${(g.dmgLvl * 1.85).toFixed(1)})</span>` : ''}
+      </div>
+      <p class="radvice">${advice}</p>
+    </div>`;
+  });
+  html += '</div>';
+
+  if (comboPts < 10) {
+    html += `<div class="alert alert-warn">Core pts (${comboPts}) below the 10-point threshold. Focus on acquiring more gems before heavy processing investment.</div>`;
+  } else if (comboPts >= 17) {
+    html += `<div class="alert alert-good">17-point threshold reached (${comboPts} pts). 18/19/20 still add real value, but diminishing returns kick in past this point.</div>`;
+  }
+
+  const belowBaseline = scored.filter(g => g.score < baseline && bestIds.has(g.id));
+  if (belowBaseline.length) {
+    html += `<div class="alert alert-warn">${belowBaseline.length} equipped gem(s) below baseline ${baseline}. Target: 4 WP, 5 pts, and side nodes with two damage lines.</div>`;
+  }
+
+  document.getElementById('results').innerHTML = html;
+}
+
+onRoleChange();
+addGem('Stable (8)', 'Relic', 5, 5, 0, 20);
+addGem('Solidity (9)', 'Relic', 6, 4, 10, 15);
+addGem('Erosion (8)', 'Legendary', 7, 3, 0, 0);
+render();
+</script>
+</body>
+</html>
