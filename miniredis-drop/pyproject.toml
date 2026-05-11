@@ -1,0 +1,9 @@
+[project]
+name = "miniredis"
+version = "0.1.0"
+description = "A minimal RESP-compatible key/value server"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
