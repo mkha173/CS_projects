@@ -1,0 +1,29 @@
+#version 330 core
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+
+uniform mat4 MVP;
+uniform mat4 ModelMatrix;
+uniform mat4 ViewMatrix;
+uniform vec3 LightDirection1;
+uniform vec3 LightDirection2;
+
+out vec3 fragNormal_cameraspace;
+out vec3 eyeDirection_cameraspace;
+out vec3 lightDirection1_cameraspace;
+out vec3 lightDirection2_cameraspace;
+
+void main() {
+    gl_Position = MVP * vec4(position, 1.0);
+
+    vec3 vertexPos_cameraspace = (ViewMatrix * ModelMatrix * vec4(position, 1.0)).xyz;
+
+    eyeDirection_cameraspace = -vertexPos_cameraspace;
+
+    mat3 normalMatrix = mat3(transpose(inverse(ViewMatrix * ModelMatrix)));
+    fragNormal_cameraspace = normalize(normalMatrix * normal);
+
+    lightDirection1_cameraspace = normalize((ViewMatrix * vec4(-LightDirection1, 0.0)).xyz);
+    lightDirection2_cameraspace = normalize((ViewMatrix * vec4(-LightDirection2, 0.0)).xyz);
+}

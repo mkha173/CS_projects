@@ -1,0 +1,30 @@
+Script started on 2026-01-29 18:19:40-05:00 [TERM="xterm-256color" TTY="/dev/pts/59" COLUMNS="176" LINES="18"]
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ whoami
+[?2004lmkha333
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ date
+[?2004lThu Jan 29 06:19:44 PM EST 2026
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ pwd
+[?2004l/home/mkha333/courses/cs3340/asn1
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ make clean[K[K[K[K[Kasn1_a
+[?2004lmake: 'asn1_a' is up to date.
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ make clean
+[?2004lrm -f *.o asn1_a asn1_b
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ make asn1_a
+[?2004lg++ -O2 -Wall -c fib_naive.cpp
+g++ -O2 -Wall -o asn1_a fib_naive.o
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ ./asn1_a
+[?2004lF(0) = 0
+F(5) = 5
+F(10) = 55
+F(15) = 610
+F(20) = 6765
+F(25) = 75025
+F(30) = 832040
+F(35) = 9227465
+F(40) = 102334155
+F(45) = 1134903170
+F(50) = 12586269025
+[?2004hmkha333@compute:~/courses/cs3340/asn1$ exit
+[?2004lexit
+
+Script done on 2026-01-29 18:20:47-05:00 [COMMAND_EXIT_CODE="0"]

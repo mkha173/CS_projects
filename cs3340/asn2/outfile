@@ -1,0 +1,341 @@
+Script started on 2026-03-07 04:48:00-05:00 [TERM="xterm-256color" TTY="/dev/pts/12" COLUMNS="176" LINES="17"]
+================================================================================
+1. INPUT BINARY IMAGE
+================================================================================
+         ++++                                                        ++ +++
++++++++++                                                           +++   +
++++++++++                                                           +++ +++
+++++++++                                                            +++ +  
++++++++                                                            ++++ +++
+++++++   ++                                                        ++++    
++++++   ++                                                         ++++ +++
+ +++   ++                                                         +++++ + +
+ ++   ++                  +++                                  +  +++++ + +
+ ++  ++           + ++++                                     ++  ++++++ + +
+ +++++    +         ++++     ++++++++                      +++   ++++++ +++
+ +++++   +         ++++++ ++++++++++                    +++++   +++++++    
+  +++             + +++++++++++++++                   +++++    ++++++++ +++
+  ++   +       + +++++++++++++++++                    +++     +++++++++   +
+ +++  ++       ++++++++++++++++++                  ++        ++++++++++ +++
+ +   +++ +  +++++++++++++++++++                  +++        +++++++++++ +  
+ +  ++ +++ ++++++++++++++++++ +                 +++        ++++++++++++ +++
+ +  +  ++  ++++++++++++++++++ +                 ++++      +++++++++++++    
+ ++++ ++ +++++++++++++++++++++                   ++++   ++++++++++++++  +++
+ +++++  ++++++++++++++++++++++                   ++++   ++++++++++++++  +  
+++++++ +++++++++++++++++++++                     ++++   +++++++++++++   +++
+++++++++++++++++++++++++++                        ++++  +++++++++++++   + +
++++  ++++++++++++++++++++                         ++++  ++++++++++++    +++
++++  ++++++++++++++++ ++                          ++++  ++++++++++++       
++   +++++++++++++++++++                           +++++ ++++++++++++       
++   +++++++++++++++++++                           +++++ +++++++++++        
+  +++++++++++++++++++ +        +                  +++++ +++++++++++        
+  ++++++++++++++++++++        +++++               +++++ +++++++++++        
+ +++++++++++++++++++             ++++           +++++++  +++++++++         
+++++++++++++++++++++       +++++++++++        +++++++++  +++++++++         
++++++++++++++++++++       ++++++++++ +       +++++++++++ +++++++++         
+++++++++++++++++++       +++++++ +++++      ++++++++++++ ++++++++          
+++++++++++++++++++       +++++++  +++++    +++++ +++++++ ++++++++          
++++++++++++++++++       +++++++    ++++    + ++  +++++++ ++++++++          
+++++++++++++++++       +   +++      +++         ++++++++ +++++++           
++++++  ++++++++++     +      ++     +++       ++++++++++ +++++++           
+++++++ +++++++++    +++               ++       +++++++++ +++++++           
+++++++ ++++++++    ++++               ++        ++++++++ +++++++           
++++++ ++++++++     ++++               ++        ++++++++  +++++            
++++++++ +++++++   +++++                +        ++++++++  +++++            
++++++++  ++++    ++++++                +        ++++++++  +++++            
+++++++++++++++   ++++++               ++         +++++++  ++++             
++++++++ + ++    +++++++               ++        ++++++++  ++++             
++++++++ +++++   ++++++++              ++         +++++++  ++++             
++++++ +++++    +++++++++           ++  +        ++++++++  +++              
+++++++++++    ++++++++++           ++  ++       +++++++++  ++              
++++++ ++++   +++++++++++           +++++++      +++++++++  ++              
+++++++++++   +++++++++++             ++++      ++++++++++  ++              
++ +++++  +  +++++++++++++                      ++++++++++  +               
++++++    + +++++++++++++                       ++++++++++  +               
++++++   +  ++++++++++++++                     +++++++++++  +               
+ ++    ++ +++++++++++++++                     +++++++++++                  
+++     + +++++++++++++++++    +++  +++++ +++ +++++++++++++                 
+++    +  +++++++++++++++++    ++++++++++ ++  +++++++++++++                 
++    +  +++++++++++++++++++    +++++        ++++++++++++++                 
++      ++++++++++++++++++++      ++++       ++++++++++++++                 
+      +++++++++++++++++++++       ++++++   +++++++++++++++                 
+++   +++++++++++++++++++++++               +++++++++++++++                 
+++   +++++++++++++++++++++++              ++++++++++++++++                 
++++ +++++++++++++++++++++++++             ++++++++++++++++                 
+ +++++++++++++++++++++++++++++            ++++++++++++++++                 
+    +++++++++++++++++++++++++++          +++++++++++++++++                 
+  +  ++++++++++++++++++++++++             ++++++++++++++++  ++             
++ ++  ++++++++++++++++++++++                 +++++++++++++    +++++        
+++++   +++++++++++++++++++++++                ++++++++++++      +++++++    
+++   + ++++++++++++++++++++++                   ++++++++++        +++++    
+++   ++ +++++++++++++++++++++                    +++++++++          +++    
++    + + ++++++++++++++++++++                      ++++++                  
+++   + +++++++++++++++++++++                       ++++++                  
+++   ++ +++++++++++++++++++                         +++++                  
++++   ++ ++++++++++++++++++                          ++++                  
++++   ++ +++++++++++++++++++                         ++++                  
+
+================================================================================
+2. CONNECTED COMPONENT IMAGE (all components)
+================================================================================
+         qqqq                                                        dd nnn
+aaaaaaaaa                                                           ddd   n
+aaaaaaaaa                                                           ddd nnn
+aaaaaaaa                                                            ddd n  
+aaaaaaa                                                            dddd nnn
+aaaaaa   aa                                                        dddd    
+aaaaa   aa                                                         dddd kkk
+ aaa   aa                                                         ddddd k k
+ aa   aa                  rrr                                  z  ddddd k k
+ aa  aa           y aaaa                                     ii  dddddd k k
+ aaaaa    x         aaaa     aaaaaaaa                      iii   dddddd kkk
+ aaaaa   w         aaaaaa aaaaaaaaaa                    iiiii   ddddddd    
+  aaa             a aaaaaaaaaaaaaaa                   iiiii    dddddddd mmm
+  aa   a       a aaaaaaaaaaaaaaaaa                    iii     ddddddddd   m
+ aaa  aa       aaaaaaaaaaaaaaaaaa                  cc        dddddddddd mmm
+ a   aaa a  aaaaaaaaaaaaaaaaaaa                  ccc        ddddddddddd m  
+ a  aa aaa aaaaaaaaaaaaaaaaaa a                 ccc        dddddddddddd mmm
+ a  a  aa  aaaaaaaaaaaaaaaaaa a                 cccc      ddddddddddddd    
+ aaaa aa aaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  jjj
+ aaaaa  aaaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  j  
+aaaaaa aaaaaaaaaaaaaaaaaaaaa                     cccc   ddddddddddddd   jjj
+aaaaaaaaaaaaaaaaaaaaaaaaaa                        cccc  ddddddddddddd   j j
+aaa  aaaaaaaaaaaaaaaaaaaa                         cccc  dddddddddddd    jjj
+aaa  aaaaaaaaaaaaaaaa aa                          cccc  dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaa a        e                  ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaaa        eeeee               ccccc ddddddddddd        
+ aaaaaaaaaaaaaaaaaaa             eeee           ccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaaa       eeeeeeeeeee        ccccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaa       eeeeeeeeee e       ccccccccccc ddddddddd         
+aaaaaaaaaaaaaaaaaa       eeeeeee eeeee      cccccccccccc dddddddd          
+aaaaaaaaaaaaaaaaaa       eeeeeee  eeeee    ccccc ccccccc dddddddd          
+aaaaaaaaaaaaaaaaa       eeeeeee    eeee    c cc  ccccccc dddddddd          
+aaaaaaaaaaaaaaaa       v   eee      eee         cccccccc ddddddd           
+aaaaa  aaaaaaaaaa     b      ee     eee       cccccccccc ddddddd           
+aaaaaa aaaaaaaaa    bbb               ee       ccccccccc ddddddd           
+aaaaaa aaaaaaaa    bbbb               ee        cccccccc ddddddd           
+aaaaa aaaaaaaa     bbbb               ee        cccccccc  ddddd            
+aaaaaaa aaaaaaa   bbbbb                e        cccccccc  ddddd            
+aaaaaaa  aaaa    bbbbbb                e        cccccccc  ddddd            
+aaaaaaaaaaaaaa   bbbbbb               ee         ccccccc  dddd             
+aaaaaaa a aa    bbbbbbb               ee        cccccccc  dddd             
+aaaaaaa aaaaa   bbbbbbbb              ee         ccccccc  dddd             
+aaaaa aaaaa    bbbbbbbbb           ee  e        cccccccc  ddd              
+aaaaaaaaaa    bbbbbbbbbb           ee  ee       ccccccccc  dd              
+aaaaa aaaa   bbbbbbbbbbb           eeeeeee      ccccccccc  dd              
+aaaaaaaaaa   bbbbbbbbbbb             eeee      cccccccccc  dd              
+a aaaaa  a  bbbbbbbbbbbbb                      cccccccccc  d               
+aaaaa    a bbbbbbbbbbbbb                       cccccccccc  d               
+aaaaa   p  bbbbbbbbbbbbbb                     ccccccccccc  d               
+ aa    pp bbbbbbbbbbbbbbb                     ccccccccccc                  
+aa     p bbbbbbbbbbbbbbbbb    fff  fffff ooo ccccccccccccc                 
+aa    u  bbbbbbbbbbbbbbbbb    ffffffffff oo  ccccccccccccc                 
+a    t  bbbbbbbbbbbbbbbbbbb    fffff        cccccccccccccc                 
+a      bbbbbbbbbbbbbbbbbbbb      ffff       cccccccccccccc                 
+      bbbbbbbbbbbbbbbbbbbbb       ffffff   ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb               ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb              cccccccccccccccc                 
+bbb bbbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc                 
+ bbbbbbbbbbbbbbbbbbbbbbbbbbbbb            cccccccccccccccc                 
+    bbbbbbbbbbbbbbbbbbbbbbbbbbb          ccccccccccccccccc                 
+  g  bbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc  ss             
+g gg  bbbbbbbbbbbbbbbbbbbbbb                 ccccccccccccc    hhhhh        
+gggg   bbbbbbbbbbbbbbbbbbbbbbb                cccccccccccc      hhhhhhh    
+gg   l bbbbbbbbbbbbbbbbbbbbbb                   cccccccccc        hhhhh    
+gg   ll bbbbbbbbbbbbbbbbbbbbb                    ccccccccc          hhh    
+g    l b bbbbbbbbbbbbbbbbbbbb                      cccccc                  
+gg   l bbbbbbbbbbbbbbbbbbbbb                       cccccc                  
+gg   ll bbbbbbbbbbbbbbbbbbb                         ccccc                  
+ggg   ll bbbbbbbbbbbbbbbbbb                          cccc                  
+ggg   ll bbbbbbbbbbbbbbbbbbb                         cccc                  
+
+================================================================================
+3. COMPONENT LIST (sorted by size, largest first)
+================================================================================
+  label   size
+  -----   ----
+    a      779
+    b      578
+    c      510
+    d      356
+    e      110
+    f      33
+    g      23
+    h      20
+    i      18
+    j      12
+    k      12
+    l      11
+    m      11
+    n      11
+    o      5
+    p      4
+    q      4
+    r      3
+    s      2
+    t      1
+    u      1
+    v      1
+    w      1
+    x      1
+    y      1
+    z      1
+
+  Total components: 26
+
+================================================================================
+4. COMPONENTS WITH SIZE > 1
+================================================================================
+         qqqq                                                        dd nnn
+aaaaaaaaa                                                           ddd   n
+aaaaaaaaa                                                           ddd nnn
+aaaaaaaa                                                            ddd n  
+aaaaaaa                                                            dddd nnn
+aaaaaa   aa                                                        dddd    
+aaaaa   aa                                                         dddd kkk
+ aaa   aa                                                         ddddd k k
+ aa   aa                  rrr                                     ddddd k k
+ aa  aa             aaaa                                     ii  dddddd k k
+ aaaaa              aaaa     aaaaaaaa                      iii   dddddd kkk
+ aaaaa             aaaaaa aaaaaaaaaa                    iiiii   ddddddd    
+  aaa             a aaaaaaaaaaaaaaa                   iiiii    dddddddd mmm
+  aa   a       a aaaaaaaaaaaaaaaaa                    iii     ddddddddd   m
+ aaa  aa       aaaaaaaaaaaaaaaaaa                  cc        dddddddddd mmm
+ a   aaa a  aaaaaaaaaaaaaaaaaaa                  ccc        ddddddddddd m  
+ a  aa aaa aaaaaaaaaaaaaaaaaa a                 ccc        dddddddddddd mmm
+ a  a  aa  aaaaaaaaaaaaaaaaaa a                 cccc      ddddddddddddd    
+ aaaa aa aaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  jjj
+ aaaaa  aaaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  j  
+aaaaaa aaaaaaaaaaaaaaaaaaaaa                     cccc   ddddddddddddd   jjj
+aaaaaaaaaaaaaaaaaaaaaaaaaa                        cccc  ddddddddddddd   j j
+aaa  aaaaaaaaaaaaaaaaaaaa                         cccc  dddddddddddd    jjj
+aaa  aaaaaaaaaaaaaaaa aa                          cccc  dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaa a        e                  ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaaa        eeeee               ccccc ddddddddddd        
+ aaaaaaaaaaaaaaaaaaa             eeee           ccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaaa       eeeeeeeeeee        ccccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaa       eeeeeeeeee e       ccccccccccc ddddddddd         
+aaaaaaaaaaaaaaaaaa       eeeeeee eeeee      cccccccccccc dddddddd          
+aaaaaaaaaaaaaaaaaa       eeeeeee  eeeee    ccccc ccccccc dddddddd          
+aaaaaaaaaaaaaaaaa       eeeeeee    eeee    c cc  ccccccc dddddddd          
+aaaaaaaaaaaaaaaa           eee      eee         cccccccc ddddddd           
+aaaaa  aaaaaaaaaa     b      ee     eee       cccccccccc ddddddd           
+aaaaaa aaaaaaaaa    bbb               ee       ccccccccc ddddddd           
+aaaaaa aaaaaaaa    bbbb               ee        cccccccc ddddddd           
+aaaaa aaaaaaaa     bbbb               ee        cccccccc  ddddd            
+aaaaaaa aaaaaaa   bbbbb                e        cccccccc  ddddd            
+aaaaaaa  aaaa    bbbbbb                e        cccccccc  ddddd            
+aaaaaaaaaaaaaa   bbbbbb               ee         ccccccc  dddd             
+aaaaaaa a aa    bbbbbbb               ee        cccccccc  dddd             
+aaaaaaa aaaaa   bbbbbbbb              ee         ccccccc  dddd             
+aaaaa aaaaa    bbbbbbbbb           ee  e        cccccccc  ddd              
+aaaaaaaaaa    bbbbbbbbbb           ee  ee       ccccccccc  dd              
+aaaaa aaaa   bbbbbbbbbbb           eeeeeee      ccccccccc  dd              
+aaaaaaaaaa   bbbbbbbbbbb             eeee      cccccccccc  dd              
+a aaaaa  a  bbbbbbbbbbbbb                      cccccccccc  d               
+aaaaa    a bbbbbbbbbbbbb                       cccccccccc  d               
+aaaaa   p  bbbbbbbbbbbbbb                     ccccccccccc  d               
+ aa    pp bbbbbbbbbbbbbbb                     ccccccccccc                  
+aa     p bbbbbbbbbbbbbbbbb    fff  fffff ooo ccccccccccccc                 
+aa       bbbbbbbbbbbbbbbbb    ffffffffff oo  ccccccccccccc                 
+a       bbbbbbbbbbbbbbbbbbb    fffff        cccccccccccccc                 
+a      bbbbbbbbbbbbbbbbbbbb      ffff       cccccccccccccc                 
+      bbbbbbbbbbbbbbbbbbbbb       ffffff   ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb               ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb              cccccccccccccccc                 
+bbb bbbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc                 
+ bbbbbbbbbbbbbbbbbbbbbbbbbbbbb            cccccccccccccccc                 
+    bbbbbbbbbbbbbbbbbbbbbbbbbbb          ccccccccccccccccc                 
+  g  bbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc  ss             
+g gg  bbbbbbbbbbbbbbbbbbbbbb                 ccccccccccccc    hhhhh        
+gggg   bbbbbbbbbbbbbbbbbbbbbbb                cccccccccccc      hhhhhhh    
+gg   l bbbbbbbbbbbbbbbbbbbbbb                   cccccccccc        hhhhh    
+gg   ll bbbbbbbbbbbbbbbbbbbbb                    ccccccccc          hhh    
+g    l b bbbbbbbbbbbbbbbbbbbb                      cccccc                  
+gg   l bbbbbbbbbbbbbbbbbbbbb                       cccccc                  
+gg   ll bbbbbbbbbbbbbbbbbbb                         ccccc                  
+ggg   ll bbbbbbbbbbbbbbbbbb                          cccc                  
+ggg   ll bbbbbbbbbbbbbbbbbbb                         cccc                  
+
+================================================================================
+5. COMPONENTS WITH SIZE > 4
+================================================================================
+                                                                     dd nnn
+aaaaaaaaa                                                           ddd   n
+aaaaaaaaa                                                           ddd nnn
+aaaaaaaa                                                            ddd n  
+aaaaaaa                                                            dddd nnn
+aaaaaa   aa                                                        dddd    
+aaaaa   aa                                                         dddd kkk
+ aaa   aa                                                         ddddd k k
+ aa   aa                                                          ddddd k k
+ aa  aa             aaaa                                     ii  dddddd k k
+ aaaaa              aaaa     aaaaaaaa                      iii   dddddd kkk
+ aaaaa             aaaaaa aaaaaaaaaa                    iiiii   ddddddd    
+  aaa             a aaaaaaaaaaaaaaa                   iiiii    dddddddd mmm
+  aa   a       a aaaaaaaaaaaaaaaaa                    iii     ddddddddd   m
+ aaa  aa       aaaaaaaaaaaaaaaaaa                  cc        dddddddddd mmm
+ a   aaa a  aaaaaaaaaaaaaaaaaaa                  ccc        ddddddddddd m  
+ a  aa aaa aaaaaaaaaaaaaaaaaa a                 ccc        dddddddddddd mmm
+ a  a  aa  aaaaaaaaaaaaaaaaaa a                 cccc      ddddddddddddd    
+ aaaa aa aaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  jjj
+ aaaaa  aaaaaaaaaaaaaaaaaaaaaa                   cccc   dddddddddddddd  j  
+aaaaaa aaaaaaaaaaaaaaaaaaaaa                     cccc   ddddddddddddd   jjj
+aaaaaaaaaaaaaaaaaaaaaaaaaa                        cccc  ddddddddddddd   j j
+aaa  aaaaaaaaaaaaaaaaaaaa                         cccc  dddddddddddd    jjj
+aaa  aaaaaaaaaaaaaaaa aa                          cccc  dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc dddddddddddd       
+a   aaaaaaaaaaaaaaaaaaa                           ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaa a        e                  ccccc ddddddddddd        
+  aaaaaaaaaaaaaaaaaaaa        eeeee               ccccc ddddddddddd        
+ aaaaaaaaaaaaaaaaaaa             eeee           ccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaaa       eeeeeeeeeee        ccccccccc  ddddddddd         
+aaaaaaaaaaaaaaaaaaa       eeeeeeeeee e       ccccccccccc ddddddddd         
+aaaaaaaaaaaaaaaaaa       eeeeeee eeeee      cccccccccccc dddddddd          
+aaaaaaaaaaaaaaaaaa       eeeeeee  eeeee    ccccc ccccccc dddddddd          
+aaaaaaaaaaaaaaaaa       eeeeeee    eeee    c cc  ccccccc dddddddd          
+aaaaaaaaaaaaaaaa           eee      eee         cccccccc ddddddd           
+aaaaa  aaaaaaaaaa     b      ee     eee       cccccccccc ddddddd           
+aaaaaa aaaaaaaaa    bbb               ee       ccccccccc ddddddd           
+aaaaaa aaaaaaaa    bbbb               ee        cccccccc ddddddd           
+aaaaa aaaaaaaa     bbbb               ee        cccccccc  ddddd            
+aaaaaaa aaaaaaa   bbbbb                e        cccccccc  ddddd            
+aaaaaaa  aaaa    bbbbbb                e        cccccccc  ddddd            
+aaaaaaaaaaaaaa   bbbbbb               ee         ccccccc  dddd             
+aaaaaaa a aa    bbbbbbb               ee        cccccccc  dddd             
+aaaaaaa aaaaa   bbbbbbbb              ee         ccccccc  dddd             
+aaaaa aaaaa    bbbbbbbbb           ee  e        cccccccc  ddd              
+aaaaaaaaaa    bbbbbbbbbb           ee  ee       ccccccccc  dd              
+aaaaa aaaa   bbbbbbbbbbb           eeeeeee      ccccccccc  dd              
+aaaaaaaaaa   bbbbbbbbbbb             eeee      cccccccccc  dd              
+a aaaaa  a  bbbbbbbbbbbbb                      cccccccccc  d               
+aaaaa    a bbbbbbbbbbbbb                       cccccccccc  d               
+aaaaa      bbbbbbbbbbbbbb                     ccccccccccc  d               
+ aa       bbbbbbbbbbbbbbb                     ccccccccccc                  
+aa       bbbbbbbbbbbbbbbbb    fff  fffff ooo ccccccccccccc                 
+aa       bbbbbbbbbbbbbbbbb    ffffffffff oo  ccccccccccccc                 
+a       bbbbbbbbbbbbbbbbbbb    fffff        cccccccccccccc                 
+a      bbbbbbbbbbbbbbbbbbbb      ffff       cccccccccccccc                 
+      bbbbbbbbbbbbbbbbbbbbb       ffffff   ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb               ccccccccccccccc                 
+bb   bbbbbbbbbbbbbbbbbbbbbbb              cccccccccccccccc                 
+bbb bbbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc                 
+ bbbbbbbbbbbbbbbbbbbbbbbbbbbbb            cccccccccccccccc                 
+    bbbbbbbbbbbbbbbbbbbbbbbbbbb          ccccccccccccccccc                 
+  g  bbbbbbbbbbbbbbbbbbbbbbbb             cccccccccccccccc                 
+g gg  bbbbbbbbbbbbbbbbbbbbbb                 ccccccccccccc    hhhhh        
+gggg   bbbbbbbbbbbbbbbbbbbbbbb                cccccccccccc      hhhhhhh    
+gg   l bbbbbbbbbbbbbbbbbbbbbb                   cccccccccc        hhhhh    
+gg   ll bbbbbbbbbbbbbbbbbbbbb                    ccccccccc          hhh    
+g    l b bbbbbbbbbbbbbbbbbbbb                      cccccc                  
+gg   l bbbbbbbbbbbbbbbbbbbbb                       cccccc                  
+gg   ll bbbbbbbbbbbbbbbbbbb                         ccccc                  
+ggg   ll bbbbbbbbbbbbbbbbbb                          cccc                  
+ggg   ll bbbbbbbbbbbbbbbbbbb                         cccc                  
+
+
+Script done on 2026-03-07 04:48:00-05:00 [COMMAND_EXIT_CODE="0"]
